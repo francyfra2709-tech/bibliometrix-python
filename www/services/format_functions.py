@@ -1,5 +1,14 @@
-from .utils import *
-from .parsers import *
+try:
+    from .utils import *
+except ImportError:
+    pass
+
+try:
+    from .parsers import *
+except ImportError:
+    pass
+
+import re
 import zipfile
 import tempfile
 import os
@@ -1252,7 +1261,27 @@ def format_sr_column(entry, source, file_type):  # Function for SR Column (forma
             publication_year = entry.get('YR', '')
             ta = entry.get('SO', '')
             sr = author + ', ' + publication_year + ', ' + ta
+    elif source == 'OpenAlex':
+        authors = entry.get('AU', [])
+        if isinstance(authors, list) and len(authors) > 0:
+            first_author = str(authors[0]).strip()
+        else:
+            first_author = str(authors or '').strip()
 
+        publication_year = str(entry.get('PY', '')).strip()
+
+        journal = entry.get('SO', '')
+        if isinstance(journal, list):
+            journal = journal[0] if len(journal) > 0 else ''
+        journal = str(journal).strip()
+
+        sr_parts = [
+            part
+            for part in [first_author, publication_year, journal]
+            if part
+        ]
+
+        sr = ', '.join(sr_parts)
     return sr
 
 
