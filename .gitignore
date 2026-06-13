@@ -3,3 +3,5 @@ bibliovenv/
 Bibenv/
 .idea/
 standardized_openalex.csv
+.venv311/
+standardized_openalex_preview.xlsx
