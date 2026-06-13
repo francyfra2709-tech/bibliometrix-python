@@ -332,5 +332,5 @@ For detailed development status and known issues, please check the [issue tracke
 ---
 
 <p align="center">
-Made with ❤️ by PRAISELab Team at University of Naples Federico II
+Made by PRAISELab Team at University of Naples Federico II
 </p>
